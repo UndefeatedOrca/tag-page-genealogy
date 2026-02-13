@@ -1,25 +1,17 @@
-export { ExampleTransformer } from "./transformer";
-export { ExampleFilter } from "./filter";
-export { ExampleEmitter } from "./emitter";
-export { default as ExampleComponent } from "./components/ExampleComponent";
+export { TagPage } from "./pageType";
+export { default as TagContent } from "./components/TagContent";
+export {
+  PageList,
+  byDateAndAlphabetical,
+  byDateAndAlphabeticalFolderFirst,
+} from "./components/PageList";
+export type { TagPageOptions } from "./pageType";
+export type { SortFn } from "./components/PageList";
 
-export type {
-  ExampleTransformerOptions,
-  ExampleFilterOptions,
-  ExampleEmitterOptions,
-} from "./types";
-
-export type { ExampleComponentOptions } from "./components/ExampleComponent";
-
-// Re-export shared types from @quartz-community/types
 export type {
   QuartzComponent,
   QuartzComponentProps,
   QuartzComponentConstructor,
-  StringResource,
-  QuartzTransformerPlugin,
-  QuartzFilterPlugin,
-  QuartzEmitterPlugin,
   QuartzPageTypePlugin,
   QuartzPageTypePluginInstance,
   PageMatcher,
