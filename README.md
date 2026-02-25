@@ -10,28 +10,20 @@ npx quartz plugin add github:quartz-community/tag-page
 
 ## Usage
 
-```ts
-// quartz.config.ts
-import * as ExternalPlugin from "./.quartz/plugins";
-
-const config: QuartzConfig = {
-  plugins: {
-    pageTypes: [ExternalPlugin.TagPage()],
-  },
-};
+```yaml title="quartz.config.yaml"
+plugins:
+  - source: github:quartz-community/tag-page
+    enabled: true
 ```
 
-```ts
-// quartz.layout.ts
-export const layout = {
-  byPageType: {
-    tag: {
-      beforeBody: [...],
-      left: [...],
-      right: [...],
-    },
-  },
-}
+For advanced use cases, you can override in TypeScript:
+
+```ts title="quartz.ts (override)"
+import * as ExternalPlugin from "./.quartz/plugins";
+
+ExternalPlugin.TagPage({
+  numPages: 10,
+});
 ```
 
 ## Configuration
@@ -43,7 +35,7 @@ export const layout = {
 
 ## Documentation
 
-See the [Quartz documentation](https://quartz.jzhao.xyz/) for more information.
+See the [Quartz documentation](https://quartz.jzhao.xyz/plugins/TagPage) for more information.
 
 ## License
 
