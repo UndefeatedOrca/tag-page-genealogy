@@ -58,10 +58,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
       );
 
     const hastRoot = tree as Root;
-    const content =
-      hastRoot.children.length === 0
-        ? fd.description
-        : htmlToJsx(hastRoot);
+    const content = hastRoot.children.length === 0 ? fd.description : htmlToJsx(hastRoot);
 
     const cssClasses = fd.frontmatter?.cssclasses ?? [];
     const classes = cssClasses.join(" ");
@@ -105,9 +102,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
 
               const root = contentPage?.htmlAst;
               const tagDesc =
-                !root || root.children.length === 0
-                  ? contentPage?.description
-                  : htmlToJsx(root);
+                !root || root.children.length === 0 ? contentPage?.description : htmlToJsx(root);
 
               const tagListingPage = `/tags/${t}` as FullSlug;
               const href = resolveRelative(slug as FullSlug, tagListingPage);
