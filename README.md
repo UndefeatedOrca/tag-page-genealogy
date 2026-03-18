@@ -23,15 +23,17 @@ import * as ExternalPlugin from "./.quartz/plugins";
 
 ExternalPlugin.TagPage({
   numPages: 10,
+  prefixTags: false,
 });
 ```
 
 ## Configuration
 
-| Option     | Type     | Default     | Description                                |
-| ---------- | -------- | ----------- | ------------------------------------------ |
-| `sort`     | `SortFn` | `undefined` | A function to sort the pages with the tag. |
-| `numPages` | `number` | `undefined` | The number of pages to show per tag page.  |
+| Option       | Type      | Default     | Description                                                                     |
+| ------------ | --------- | ----------- | ------------------------------------------------------------------------------- |
+| `sort`       | `SortFn`  | `undefined` | A function to sort the pages with the tag.                                      |
+| `numPages`   | `number`  | `undefined` | The number of pages to show per tag page.                                       |
+| `prefixTags` | `boolean` | `false`     | Whether to prefix generated tag page titles with "Tag: " (e.g. "Tag: recipes"). |
 
 ## Documentation
 
