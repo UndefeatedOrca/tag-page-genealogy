@@ -4,6 +4,8 @@ import { S as SortFn } from './PageList-DncPcZ4-.js';
 interface TagPageOptions {
     sort?: SortFn;
     numPages?: number;
+    /** Show "Tag: " prefix before tag name in generated titles. Default: false */
+    prefixTags?: boolean;
 }
 declare const TagPage: QuartzPageTypePlugin<TagPageOptions>;
 

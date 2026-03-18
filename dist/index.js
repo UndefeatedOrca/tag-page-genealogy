@@ -256,7 +256,7 @@ var TagContent_default = ((opts) => {
 var tagMatcher = ({ slug }) => {
   return slug.startsWith("tags/") || slug === "tags";
 };
-var TagPage = () => ({
+var TagPage = (opts) => ({
   name: "TagPage",
   priority: 10,
   match: tagMatcher,
@@ -278,7 +278,7 @@ var TagPage = () => ({
     for (const tag of tags) {
       const slug = joinSegments("tags", tag);
       if (existingTagSlugs.has(slug)) continue;
-      const title = tag === "index" ? i18n(locale).pages.tagContent.tagIndex : `${i18n(locale).pages.tagContent.tag}: ${tag}`;
+      const title = tag === "index" ? i18n(locale).pages.tagContent.tagIndex : opts?.prefixTags ? `${i18n(locale).pages.tagContent.tag}: ${tag}` : tag;
       virtualPages.push({
         slug,
         title,

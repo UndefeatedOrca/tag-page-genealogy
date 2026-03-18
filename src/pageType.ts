@@ -12,13 +12,15 @@ import type { SortFn } from "./components/PageList";
 export interface TagPageOptions {
   sort?: SortFn;
   numPages?: number;
+  /** Show "Tag: " prefix before tag name in generated titles. Default: false */
+  prefixTags?: boolean;
 }
 
 const tagMatcher: PageMatcher = ({ slug }) => {
   return slug.startsWith("tags/") || slug === "tags";
 };
 
-export const TagPage: QuartzPageTypePlugin<TagPageOptions> = () => ({
+export const TagPage: QuartzPageTypePlugin<TagPageOptions> = (opts) => ({
   name: "TagPage",
   priority: 10,
   match: tagMatcher,
@@ -50,7 +52,9 @@ export const TagPage: QuartzPageTypePlugin<TagPageOptions> = () => ({
       const title =
         tag === "index"
           ? i18n(locale).pages.tagContent.tagIndex
-          : `${i18n(locale).pages.tagContent.tag}: ${tag}`;
+          : opts?.prefixTags
+            ? `${i18n(locale).pages.tagContent.tag}: ${tag}`
+            : tag;
 
       virtualPages.push({
         slug,
