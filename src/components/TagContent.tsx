@@ -100,7 +100,9 @@ export default ((opts?: Partial<TagContentOptions>) => {
                 (file) => file.slug === `tags/${t}`,
               );
 
-              const root = contentPage?.htmlAst;
+              // Virtual pages have htmlAst pre-rendered by the dispatcher (contains the full
+              // PageList), so only use htmlAst from real user-authored tag pages (have filePath).
+              const root = contentPage?.filePath ? contentPage?.htmlAst : undefined;
               const tagDesc =
                 !root || root.children.length === 0 ? contentPage?.description : htmlToJsx(root);
 

@@ -221,7 +221,7 @@ var TagContent_default = ((opts) => {
           const contentPage = allFiles.find(
             (file) => file.slug === `tags/${t}`
           );
-          const root = contentPage?.htmlAst;
+          const root = contentPage?.filePath ? contentPage?.htmlAst : void 0;
           const tagDesc = !root || root.children.length === 0 ? contentPage?.description : htmlToJsx(root);
           const tagListingPage = `/tags/${t}`;
           const href = resolveRelative(slug, tagListingPage);
