@@ -1,5 +1,9 @@
+import { getDate } from '@quartz-community/utils/sort';
+export { byDateAndAlphabetical } from '@quartz-community/utils/sort';
 import { jsx, jsxs, Fragment } from 'preact/jsx-runtime';
 import { htmlToJsx } from '@quartz-community/utils/jsx';
+
+// src/components/PageList.tsx
 
 // src/util/path.ts
 function joinSegments(...args) {
@@ -46,32 +50,14 @@ function getAllSegmentPrefixes(tags) {
   }
   return results;
 }
-function getDate(cfg, data) {
-  const type = cfg?.defaultDateType ?? "created";
-  return data.dates?.[type];
-}
-function byDateAndAlphabetical(cfg) {
-  return (f1, f2) => {
-    if (f1.dates && f2.dates) {
-      return (getDate(cfg, f2)?.getTime() ?? 0) - (getDate(cfg, f1)?.getTime() ?? 0);
-    } else if (f1.dates && !f2.dates) {
-      return -1;
-    } else if (!f1.dates && f2.dates) {
-      return 1;
-    }
-    const f1Title = f1.frontmatter?.title?.toLowerCase() ?? "";
-    const f2Title = f2.frontmatter?.title?.toLowerCase() ?? "";
-    return f1Title.localeCompare(f2Title);
-  };
-}
-function byDateAndAlphabeticalFolderFirst(cfg) {
+function byDateAndAlphabeticalFolderFirst(_cfg) {
   return (f1, f2) => {
     const f1IsFolder = isFolderPath(f1.slug ?? "");
     const f2IsFolder = isFolderPath(f2.slug ?? "");
     if (f1IsFolder && !f2IsFolder) return -1;
     if (!f1IsFolder && f2IsFolder) return 1;
     if (f1.dates && f2.dates) {
-      return (getDate(cfg, f2)?.getTime() ?? 0) - (getDate(cfg, f1)?.getTime() ?? 0);
+      return (getDate(f2)?.getTime() ?? 0) - (getDate(f1)?.getTime() ?? 0);
     } else if (f1.dates && !f2.dates) {
       return -1;
     } else if (!f1.dates && f2.dates) {
@@ -96,7 +82,7 @@ var PageList = ({
   limit,
   sort
 }) => {
-  const sorter = sort ?? byDateAndAlphabeticalFolderFirst(cfg);
+  const sorter = sort ?? byDateAndAlphabeticalFolderFirst();
   let list = [...allFiles].sort(sorter);
   if (limit) {
     list = list.slice(0, limit);
@@ -109,7 +95,7 @@ var PageList = ({
       /* @__PURE__ */ jsx("p", { class: "meta", children: page.dates && /* @__PURE__ */ jsx(
         DateDisplay,
         {
-          date: getDate(cfg, page),
+          date: getDate(page),
           locale: cfg?.locale ?? "en-US"
         }
       ) }),
@@ -266,6 +252,6 @@ var TagContent_default = ((opts) => {
   return TagContent;
 });
 
-export { PageList, TagContent_default as TagContent, byDateAndAlphabetical, byDateAndAlphabeticalFolderFirst };
+export { PageList, TagContent_default as TagContent, byDateAndAlphabeticalFolderFirst };
 //# sourceMappingURL=index.js.map
 //# sourceMappingURL=index.js.map
