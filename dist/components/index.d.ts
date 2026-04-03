@@ -1,11 +1,9 @@
-import { QuartzComponent } from '@quartz-community/types';
-import { S as SortFn } from '../PageList-DncPcZ4-.js';
-export { P as PageList, b as byDateAndAlphabetical, a as byDateAndAlphabeticalFolderFirst } from '../PageList-DncPcZ4-.js';
+export { _ as TagContent } from '../TagContent-BLPikvbg.js';
+import { QuartzComponent, SortFn } from '@quartz-community/types';
+export { SortFn } from '@quartz-community/types';
 
-interface TagContentOptions {
-    sort?: SortFn;
-    numPages: number;
-}
-declare const _default: (opts?: Partial<TagContentOptions>) => QuartzComponent;
+declare function byDateAndAlphabetical(cfg: unknown): SortFn;
+declare function byDateAndAlphabeticalFolderFirst(cfg: unknown): SortFn;
+declare const PageList: QuartzComponent;
 
-export { SortFn, _default as TagContent };
+export { PageList, byDateAndAlphabetical, byDateAndAlphabeticalFolderFirst };
