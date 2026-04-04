@@ -3,10 +3,10 @@ export default {
     tagContent: {
           tag: "Etiket",
           tagIndex: "Etiket Sırası",
-          itemsUnderTag: ({ count }) =>
+          itemsUnderTag: ({ count }: { count: number }) =>
             count === 1 ? "Bu etikete sahip 1 öğe." : `Bu etiket altındaki ${count} öğe.`,
-          showingFirst: ({ count }) => `İlk ${count} etiket gösteriliyor.`,
-          totalTags: ({ count }) => `Toplam ${count} adet etiket bulundu.`,
+          showingFirst: ({ count }: { count: number }) => `İlk ${count} etiket gösteriliyor.`,
+          totalTags: ({ count }: { count: number }) => `Toplam ${count} adet etiket bulundu.`,
         },
   },
   components: {},
