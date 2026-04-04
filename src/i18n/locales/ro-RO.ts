@@ -3,10 +3,10 @@ export default {
     tagContent: {
           tag: "Etichetă",
           tagIndex: "Indexul etichetelor",
-          itemsUnderTag: ({ count }) =>
+          itemsUnderTag: ({ count }: { count: number }) =>
             count === 1 ? "1 articol cu această etichetă." : `${count} articole cu această etichetă.`,
-          showingFirst: ({ count }) => `Se afișează primele ${count} etichete.`,
-          totalTags: ({ count }) => `Au fost găsite ${count} etichete în total.`,
+          showingFirst: ({ count }: { count: number }) => `Se afișează primele ${count} etichete.`,
+          totalTags: ({ count }: { count: number }) => `Au fost găsite ${count} etichete în total.`,
         },
   },
   components: {},
