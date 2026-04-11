@@ -32,10 +32,15 @@ function concatenateResources(
 interface PageFileData {
   slug?: string;
   filePath?: string;
+  unlisted?: boolean;
   frontmatter?: { title?: string; tags?: string[]; cssclasses?: string[] };
   description?: unknown;
   htmlAst?: Root;
   [key: string]: unknown;
+}
+
+function isListed(file: PageFileData): boolean {
+  return file.unlisted !== true;
 }
 
 export default ((opts?: Partial<TagContentOptions>) => {
@@ -53,9 +58,11 @@ export default ((opts?: Partial<TagContentOptions>) => {
 
     const tag = simplifySlug(slug.slice("tags/".length) as FullSlug);
     const allPagesWithTag = (t: string) =>
-      (allFiles as PageFileData[]).filter((file) =>
-        (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(t),
-      );
+      (allFiles as PageFileData[])
+        .filter(isListed)
+        .filter((file) =>
+          (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(t),
+        );
 
     const hastRoot = tree as Root;
     const content = hastRoot.children.length === 0 ? fd.description : htmlToJsx(hastRoot);
@@ -67,6 +74,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
       const tags = [
         ...new Set(
           (allFiles as PageFileData[])
+            .filter(isListed)
             .flatMap((data) => data.frontmatter?.tags ?? [])
             .flatMap(getAllSegmentPrefixes),
         ),

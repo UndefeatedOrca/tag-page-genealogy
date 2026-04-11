@@ -25,7 +25,9 @@ export const TagPage: QuartzPageTypePlugin<TagPageOptions> = (opts) => ({
   priority: 10,
   match: tagMatcher,
   generate({ content, cfg }) {
-    const allFiles = content.map((c) => c[1].data);
+    const allFiles = content
+      .map((c) => c[1].data)
+      .filter((d) => (d as { unlisted?: unknown } | undefined)?.unlisted !== true);
     const locale = (cfg as { locale?: string } | undefined)?.locale ?? "en-US";
 
     const tags: Set<string> = new Set(

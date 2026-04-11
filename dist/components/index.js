@@ -2761,6 +2761,9 @@ function concatenateResources(...resources) {
   const result = resources.filter((r) => r !== void 0).flat();
   return result.length === 0 ? void 0 : result;
 }
+function isListed(file) {
+  return file.unlisted !== true;
+}
 var TagContent_default = ((opts) => {
   const options = { ...defaultOptions, ...opts };
   const TagContent = (props) => {
@@ -2772,7 +2775,7 @@ var TagContent_default = ((opts) => {
       throw new Error(`Component "TagContent" tried to render a non-tag page: ${slug2}`);
     }
     const tag = simplifySlug(slug2.slice("tags/".length));
-    const allPagesWithTag = (t) => allFiles.filter(
+    const allPagesWithTag = (t) => allFiles.filter(isListed).filter(
       (file) => (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(t)
     );
     const hastRoot = tree;
@@ -2782,7 +2785,7 @@ var TagContent_default = ((opts) => {
     if (tag === "/") {
       const tags = [
         ...new Set(
-          allFiles.flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes)
+          allFiles.filter(isListed).flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes)
         )
       ].sort((a, b) => a.localeCompare(b));
       const tagItemMap = /* @__PURE__ */ new Map();
