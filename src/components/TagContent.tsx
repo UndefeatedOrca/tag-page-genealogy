@@ -96,7 +96,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
               const pages = tagItemMap.get(t)!;
               const listProps = {
                 ...props,
-                allFiles: pages,
+                allFiles: pages as unknown as QuartzComponentProps["allFiles"],
               };
               const pageListContent = PageList({
                 ...listProps,
@@ -151,7 +151,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
       const pages = allPagesWithTag(tag);
       const listProps = {
         ...props,
-        allFiles: pages,
+        allFiles: pages as unknown as QuartzComponentProps["allFiles"],
       };
       const pageListContent = PageList({
         ...listProps,
