@@ -2,6 +2,7 @@ import type {
   QuartzComponent,
   QuartzComponentConstructor,
   QuartzComponentProps,
+  QuartzPluginData,
   SortFn,
 } from "@quartz-community/types";
 import { PageList } from "./PageList";
@@ -29,15 +30,7 @@ function concatenateResources(
   return result.length === 0 ? undefined : result;
 }
 
-interface PageFileData {
-  slug?: string;
-  filePath?: string;
-  unlisted?: boolean;
-  frontmatter?: { title?: string; tags?: string[]; cssclasses?: string[] };
-  description?: unknown;
-  htmlAst?: Root;
-  [key: string]: unknown;
-}
+type PageFileData = QuartzPluginData & Record<string, unknown>;
 
 function isListed(file: PageFileData): boolean {
   return file.unlisted !== true;
@@ -96,7 +89,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
               const pages = tagItemMap.get(t)!;
               const listProps = {
                 ...props,
-                allFiles: pages as unknown as QuartzComponentProps["allFiles"],
+                allFiles: pages,
               };
               const pageListContent = PageList({
                 ...listProps,
@@ -151,7 +144,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
       const pages = allPagesWithTag(tag);
       const listProps = {
         ...props,
-        allFiles: pages as unknown as QuartzComponentProps["allFiles"],
+        allFiles: pages,
       };
       const pageListContent = PageList({
         ...listProps,
