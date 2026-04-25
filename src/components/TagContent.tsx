@@ -81,7 +81,9 @@ export default ((opts?: Partial<TagContentOptions>) => {
       return (
         <div class="popover-hint">
           <article class={classes}>
-            <p>{content}</p>
+            <div class="markdown-preview-view markdown-rendered">
+              <p>{content}</p>
+            </div>
           </article>
           <p>{i18n(locale).pages.tagContent.totalTags({ count: tags.length })}</p>
           <div>
@@ -153,7 +155,9 @@ export default ((opts?: Partial<TagContentOptions>) => {
 
       return (
         <div class="popover-hint">
-          <article class={classes}>{content}</article>
+          <article class={classes}>
+            <div class="markdown-preview-view markdown-rendered">{content}</div>
+          </article>
           <div class="page-listing">
             <p>{i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length })}</p>
             <div>{pageListContent}</div>

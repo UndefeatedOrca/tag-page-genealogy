@@ -2777,7 +2777,7 @@ var TagContent_default = ((opts) => {
         tagItemMap.set(t, allPagesWithTag(t));
       }
       return /* @__PURE__ */ jsxs("div", { class: "popover-hint", children: [
-        /* @__PURE__ */ jsx("article", { class: classes, children: /* @__PURE__ */ jsx("p", { children: content }) }),
+        /* @__PURE__ */ jsx("article", { class: classes, children: /* @__PURE__ */ jsx("div", { class: "markdown-preview-view markdown-rendered", children: /* @__PURE__ */ jsx("p", { children: content }) }) }),
         /* @__PURE__ */ jsx("p", { children: i18n(locale).pages.tagContent.totalTags({ count: tags.length }) }),
         /* @__PURE__ */ jsx("div", { children: tags.map((t) => {
           const pages = tagItemMap.get(t);
@@ -2826,7 +2826,7 @@ var TagContent_default = ((opts) => {
         sort: options?.sort
       });
       return /* @__PURE__ */ jsxs("div", { class: "popover-hint", children: [
-        /* @__PURE__ */ jsx("article", { class: classes, children: content }),
+        /* @__PURE__ */ jsx("article", { class: classes, children: /* @__PURE__ */ jsx("div", { class: "markdown-preview-view markdown-rendered", children: content }) }),
         /* @__PURE__ */ jsxs("div", { class: "page-listing", children: [
           /* @__PURE__ */ jsx("p", { children: i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length }) }),
           /* @__PURE__ */ jsx("div", { children: pageListContent })
