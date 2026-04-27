@@ -1,6 +1,3 @@
-import { jsxs, jsx, Fragment } from 'preact/jsx-runtime';
-import { h } from 'preact';
-
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -59,8 +56,8 @@ var require_cjs = __commonJS({
       function updatePosition(str) {
         var lines = str.match(NEWLINE_REGEX);
         if (lines) lineno += lines.length;
-        var i = str.lastIndexOf(NEWLINE);
-        column = ~i ? str.length - i : column + str.length;
+        var i2 = str.lastIndexOf(NEWLINE);
+        column = ~i2 ? str.length - i2 : column + str.length;
       }
       function position3() {
         var start2 = { line: lineno, column };
@@ -91,22 +88,22 @@ var require_cjs = __commonJS({
         }
       }
       function match(re2) {
-        var m = re2.exec(style);
-        if (!m) return;
-        var str = m[0];
+        var m2 = re2.exec(style);
+        if (!m2) return;
+        var str = m2[0];
         updatePosition(str);
         style = style.slice(str.length);
-        return m;
+        return m2;
       }
       function whitespace2() {
         match(WHITESPACE_REGEX);
       }
       function comments(rules) {
-        var c;
+        var c2;
         rules = rules || [];
-        while (c = comment()) {
-          if (c !== false) {
-            rules.push(c);
+        while (c2 = comment()) {
+          if (c2 !== false) {
+            rules.push(c2);
           }
         }
         return rules;
@@ -114,18 +111,18 @@ var require_cjs = __commonJS({
       function comment() {
         var pos = position3();
         if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1)) return;
-        var i = 2;
-        while (EMPTY_STRING != style.charAt(i) && (ASTERISK != style.charAt(i) || FORWARD_SLASH != style.charAt(i + 1))) {
-          ++i;
+        var i2 = 2;
+        while (EMPTY_STRING != style.charAt(i2) && (ASTERISK != style.charAt(i2) || FORWARD_SLASH != style.charAt(i2 + 1))) {
+          ++i2;
         }
-        i += 2;
-        if (EMPTY_STRING === style.charAt(i - 1)) {
+        i2 += 2;
+        if (EMPTY_STRING === style.charAt(i2 - 1)) {
           return error("End of comment missing");
         }
-        var str = style.slice(2, i - 2);
+        var str = style.slice(2, i2 - 2);
         column += 2;
         updatePosition(str);
-        style = style.slice(i);
+        style = style.slice(i2);
         column += 2;
         return pos({
           type: TYPE_COMMENT,
@@ -295,23 +292,23 @@ function joinSegments(...args) {
   }
   return joined;
 }
-function endsWith(s, suffix) {
-  return s === suffix || s.endsWith("/" + suffix);
+function endsWith(s2, suffix) {
+  return s2 === suffix || s2.endsWith("/" + suffix);
 }
-function trimSuffix(s, suffix) {
-  if (endsWith(s, suffix)) {
-    s = s.slice(0, -suffix.length);
+function trimSuffix(s2, suffix) {
+  if (endsWith(s2, suffix)) {
+    s2 = s2.slice(0, -suffix.length);
   }
-  return s;
+  return s2;
 }
-function stripSlashes(s, onlyStripPrefix) {
-  if (s.startsWith("/")) {
-    s = s.substring(1);
+function stripSlashes(s2, onlyStripPrefix) {
+  if (s2.startsWith("/")) {
+    s2 = s2.substring(1);
   }
-  if (!onlyStripPrefix && s.endsWith("/")) {
-    s = s.slice(0, -1);
+  if (!onlyStripPrefix && s2.endsWith("/")) {
+    s2 = s2.slice(0, -1);
   }
-  return s;
+  return s2;
 }
 function isFolderPath(fplike) {
   return fplike.endsWith("/") || endsWith(fplike, "index") || endsWith(fplike, "index.md") || endsWith(fplike, "index.html");
@@ -319,13 +316,13 @@ function isFolderPath(fplike) {
 function getAllSegmentPrefixes(path) {
   const segments = path.split("/");
   const results = [];
-  for (let i = 0; i < segments.length; i++) {
-    results.push(segments.slice(0, i + 1).join("/"));
+  for (let i2 = 0; i2 < segments.length; i2++) {
+    results.push(segments.slice(0, i2 + 1).join("/"));
   }
   return results;
 }
 function pathToRoot(slug2) {
-  let rootPath = slug2.split("/").filter((x) => x !== "").slice(0, -1).map((_) => "..").join("/");
+  let rootPath = slug2.split("/").filter((x2) => x2 !== "").slice(0, -1).map((_2) => "..").join("/");
   if (rootPath.length === 0) {
     rootPath = ".";
   }
@@ -335,26 +332,66 @@ function resolveRelative(current, target) {
   const res = joinSegments(pathToRoot(current), simplifySlug(target));
   return res;
 }
+
+// node_modules/preact/dist/preact.mjs
+var n;
+var l;
+var u;
+var w = [];
+function k(l2, u3, t2) {
+  var i2, r2, o2, e2 = {};
+  for (o2 in u3) "key" == o2 ? i2 = u3[o2] : "ref" == o2 ? r2 = u3[o2] : e2[o2] = u3[o2];
+  if (arguments.length > 2 && (e2.children = arguments.length > 3 ? n.call(arguments, 2) : t2), "function" == typeof l2 && null != l2.defaultProps) for (o2 in l2.defaultProps) void 0 === e2[o2] && (e2[o2] = l2.defaultProps[o2]);
+  return x(l2, e2, i2, r2, null);
+}
+function x(n2, t2, i2, r2, o2) {
+  var e2 = { type: n2, props: t2, key: i2, ref: r2, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: null == o2 ? ++u : o2, __i: -1, __u: 0 };
+  return null != l.vnode && l.vnode(e2), e2;
+}
+function S(n2) {
+  return n2.children;
+}
+n = w.slice, l = { __e: function(n2, l2, u3, t2) {
+  for (var i2, r2, o2; l2 = l2.__; ) if ((i2 = l2.__c) && !i2.__) try {
+    if ((r2 = i2.constructor) && null != r2.getDerivedStateFromError && (i2.setState(r2.getDerivedStateFromError(n2)), o2 = i2.__d), null != i2.componentDidCatch && (i2.componentDidCatch(n2, t2 || {}), o2 = i2.__d), o2) return i2.__E = i2;
+  } catch (l3) {
+    n2 = l3;
+  }
+  throw n2;
+} }, u = 0, "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, Math.random().toString(8);
+
+// node_modules/preact/jsx-runtime/dist/jsxRuntime.mjs
+var f2 = 0;
+function u2(e2, t2, n2, o2, i2, u3) {
+  t2 || (t2 = {});
+  var a2, c2, p2 = t2;
+  if ("ref" in p2) for (c2 in p2 = {}, t2) "ref" == c2 ? a2 = t2[c2] : p2[c2] = t2[c2];
+  var l2 = { type: e2, props: p2, key: n2, ref: a2, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: --f2, __i: -1, __u: 0, __source: i2, __self: u3 };
+  if ("function" == typeof e2 && (a2 = e2.defaultProps)) for (c2 in a2) void 0 === p2[c2] && (p2[c2] = a2[c2]);
+  return l.vnode && l.vnode(l2), l2;
+}
+
+// src/components/PageList.tsx
 function byDateAndAlphabeticalFolderFirst(_cfg) {
-  return (f1, f2) => {
+  return (f1, f22) => {
     const f1IsFolder = isFolderPath(f1.slug ?? "");
-    const f2IsFolder = isFolderPath(f2.slug ?? "");
+    const f2IsFolder = isFolderPath(f22.slug ?? "");
     if (f1IsFolder && !f2IsFolder) return -1;
     if (!f1IsFolder && f2IsFolder) return 1;
-    if (f1.dates && f2.dates) {
-      return (getDate(f2)?.getTime() ?? 0) - (getDate(f1)?.getTime() ?? 0);
-    } else if (f1.dates && !f2.dates) {
+    if (f1.dates && f22.dates) {
+      return (getDate(f22)?.getTime() ?? 0) - (getDate(f1)?.getTime() ?? 0);
+    } else if (f1.dates && !f22.dates) {
       return -1;
-    } else if (!f1.dates && f2.dates) {
+    } else if (!f1.dates && f22.dates) {
       return 1;
     }
     const f1Title = f1.frontmatter?.title?.toLowerCase() ?? "";
-    const f2Title = f2.frontmatter?.title?.toLowerCase() ?? "";
+    const f2Title = f22.frontmatter?.title?.toLowerCase() ?? "";
     return f1Title.localeCompare(f2Title);
   };
 }
 function DateDisplay({ date, locale }) {
-  return /* @__PURE__ */ jsx("time", { dateTime: date.toISOString(), children: date.toLocaleDateString(locale, {
+  return /* @__PURE__ */ u2("time", { dateTime: date.toISOString(), children: date.toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "2-digit"
@@ -373,18 +410,18 @@ var PageList = ({
     list = list.slice(0, limit);
   }
   const fileSlug = fileData?.slug;
-  return /* @__PURE__ */ jsx("ul", { class: "section-ul", children: list.map((page) => {
+  return /* @__PURE__ */ u2("ul", { class: "section-ul", children: list.map((page) => {
     const title = page.frontmatter?.title;
     const tags = page.frontmatter?.tags ?? [];
-    return /* @__PURE__ */ jsx("li", { class: "section-li", children: /* @__PURE__ */ jsxs("div", { class: "section", children: [
-      /* @__PURE__ */ jsx("p", { class: "meta", children: page.dates && getDate(page) && /* @__PURE__ */ jsx(
+    return /* @__PURE__ */ u2("li", { class: "section-li", children: /* @__PURE__ */ u2("div", { class: "section", children: [
+      /* @__PURE__ */ u2("p", { class: "meta", children: page.dates && getDate(page) && /* @__PURE__ */ u2(
         DateDisplay,
         {
           date: getDate(page),
           locale: cfg?.locale ?? "en-US"
         }
       ) }),
-      /* @__PURE__ */ jsx("div", { class: "desc", children: /* @__PURE__ */ jsx("h3", { children: /* @__PURE__ */ jsx(
+      /* @__PURE__ */ u2("div", { class: "desc", children: /* @__PURE__ */ u2("h3", { children: /* @__PURE__ */ u2(
         "a",
         {
           href: resolveRelative(fileSlug ?? "", page.slug),
@@ -392,7 +429,7 @@ var PageList = ({
           children: title
         }
       ) }) }),
-      /* @__PURE__ */ jsx("ul", { class: "tags", children: tags.map((tag) => /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx(
+      /* @__PURE__ */ u2("ul", { class: "tags", children: tags.map((tag) => /* @__PURE__ */ u2("li", { children: /* @__PURE__ */ u2(
         "a",
         {
           class: "internal tag-link",
@@ -651,7 +688,7 @@ var aria = create({
     ariaValueText: null,
     role: null
   },
-  transform(_, property) {
+  transform(_2, property) {
     return property === "role" ? property : "aria-" + property.slice(4).toLowerCase();
   }
 });
@@ -1604,7 +1641,7 @@ var xlink = create({
     xLinkType: null
   },
   space: "xlink",
-  transform(_, property) {
+  transform(_2, property) {
     return "xlink:" + property.slice(5).toLowerCase();
   }
 });
@@ -1621,7 +1658,7 @@ var xmlns = create({
 var xml = create({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
-  transform(_, property) {
+  transform(_2, property) {
     return "xml:" + property.slice(3).toLowerCase();
   }
 });
@@ -2011,7 +2048,7 @@ function root(state, node, key) {
   addChildren(props, createChildren(state, node));
   return state.create(node, state.Fragment, props, key);
 }
-function text(_, node) {
+function text(_2, node) {
   return node.value;
 }
 function addNode(state, props, type, node) {
@@ -2027,11 +2064,11 @@ function addChildren(props, children) {
     }
   }
 }
-function productionCreate(_, jsx4, jsxs4) {
+function productionCreate(_2, jsx, jsxs) {
   return create2;
-  function create2(_2, type, props, key) {
+  function create2(_3, type, props, key) {
     const isStaticChildren = Array.isArray(props.children);
-    const fn = isStaticChildren ? jsxs4 : jsx4;
+    const fn = isStaticChildren ? jsxs : jsx;
     return key ? fn(type, props, key) : fn(type, props);
   }
 }
@@ -2248,24 +2285,26 @@ function transformStyleToCssCasing(from) {
 function toDash($0) {
   return "-" + $0.toLowerCase();
 }
+
+// node_modules/@quartz-community/utils/dist/jsx.js
 function childrenToString(children) {
   if (typeof children === "string") return children;
   if (Array.isArray(children)) return children.map(childrenToString).join("");
   return String(children ?? "");
 }
 var builtinComponents = {
-  table: (props) => /* @__PURE__ */ jsx("div", {
+  table: (props) => /* @__PURE__ */ u2("div", {
     class: "table-container",
-    children: /* @__PURE__ */ jsx("table", { ...props })
+    children: /* @__PURE__ */ u2("table", { ...props })
   }),
-  style: ({ children, ...rest }) => h("style", { ...rest, dangerouslySetInnerHTML: { __html: childrenToString(children) } }),
-  script: ({ children, ...rest }) => h("script", { ...rest, dangerouslySetInnerHTML: { __html: childrenToString(children) } })
+  style: ({ children, ...rest }) => k("style", { ...rest, dangerouslySetInnerHTML: { __html: childrenToString(children) } }),
+  script: ({ children, ...rest }) => k("script", { ...rest, dangerouslySetInnerHTML: { __html: childrenToString(children) } })
 };
 function htmlToJsx(tree, components) {
   return toJsxRuntime(tree, {
-    Fragment,
-    jsx: jsx,
-    jsxs: jsxs,
+    Fragment: S,
+    jsx: u2,
+    jsxs: u2,
     elementAttributeNameCase: "html",
     components: { ...builtinComponents, ...components }
   });
@@ -2738,11 +2777,13 @@ function i18n(locale) {
 
 // src/components/styles/listPage.scss
 var listPage_default = "ul.section-ul {\n  list-style: none;\n  margin-top: 2em;\n  padding-left: 0;\n}\n\nli.section-li {\n  margin-bottom: 1em;\n}\nli.section-li > .section {\n  display: grid;\n  grid-template-columns: fit-content(8em) 3fr 1fr;\n}\n@media all and (max-width: 600px) {\n  li.section-li > .section > .tags {\n    display: none;\n  }\n}\nli.section-li > .section > .desc > h3 > a {\n  background-color: transparent;\n}\nli.section-li > .section .meta {\n  margin: 0 1em 0 0;\n  opacity: 0.6;\n}\n\n.popover .section {\n  grid-template-columns: fit-content(8em) 1fr !important;\n}\n.popover .section > .tags {\n  display: none;\n}";
+
+// src/components/TagContent.tsx
 var defaultOptions = {
   numPages: 10
 };
 function concatenateResources(...resources) {
-  const result = resources.filter((r) => r !== void 0).flat();
+  const result = resources.filter((r2) => r2 !== void 0).flat();
   return result.length === 0 ? void 0 : result;
 }
 function isListed(file) {
@@ -2759,8 +2800,8 @@ var TagContent_default = ((opts) => {
       throw new Error(`Component "TagContent" tried to render a non-tag page: ${slug2}`);
     }
     const tag = simplifySlug(slug2.slice("tags/".length));
-    const allPagesWithTag = (t) => allFiles.filter(isListed).filter(
-      (file) => (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(t)
+    const allPagesWithTag = (t2) => allFiles.filter(isListed).filter(
+      (file) => (file.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes).includes(t2)
     );
     const hastRoot = tree;
     const content = hastRoot.children.length === 0 ? fd.description : htmlToJsx(hastRoot);
@@ -2771,16 +2812,16 @@ var TagContent_default = ((opts) => {
         ...new Set(
           allFiles.filter(isListed).flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes)
         )
-      ].sort((a, b) => a.localeCompare(b));
+      ].sort((a2, b2) => a2.localeCompare(b2));
       const tagItemMap = /* @__PURE__ */ new Map();
-      for (const t of tags) {
-        tagItemMap.set(t, allPagesWithTag(t));
+      for (const t2 of tags) {
+        tagItemMap.set(t2, allPagesWithTag(t2));
       }
-      return /* @__PURE__ */ jsxs("div", { class: "popover-hint", children: [
-        /* @__PURE__ */ jsx("article", { class: classes, children: /* @__PURE__ */ jsx("div", { class: "markdown-preview-view markdown-rendered", children: /* @__PURE__ */ jsx("p", { children: content }) }) }),
-        /* @__PURE__ */ jsx("p", { children: i18n(locale).pages.tagContent.totalTags({ count: tags.length }) }),
-        /* @__PURE__ */ jsx("div", { children: tags.map((t) => {
-          const pages = tagItemMap.get(t);
+      return /* @__PURE__ */ u2("div", { class: "popover-hint", children: [
+        /* @__PURE__ */ u2("article", { class: classes, children: /* @__PURE__ */ u2("div", { class: "markdown-preview-view markdown-rendered", children: /* @__PURE__ */ u2("p", { children: content }) }) }),
+        /* @__PURE__ */ u2("p", { children: i18n(locale).pages.tagContent.totalTags({ count: tags.length }) }),
+        /* @__PURE__ */ u2("div", { children: tags.map((t2) => {
+          const pages = tagItemMap.get(t2);
           const listProps = {
             ...props,
             allFiles: pages
@@ -2791,21 +2832,21 @@ var TagContent_default = ((opts) => {
             sort: options?.sort
           });
           const contentPage = allFiles.find(
-            (file) => file.slug === `tags/${t}`
+            (file) => file.slug === `tags/${t2}`
           );
           const root2 = contentPage?.filePath ? contentPage?.htmlAst : void 0;
           const tagDesc = !root2 || root2.children.length === 0 ? contentPage?.description : htmlToJsx(root2);
-          const tagListingPage = `/tags/${t}`;
+          const tagListingPage = `/tags/${t2}`;
           const href = resolveRelative(slug2, tagListingPage);
-          return /* @__PURE__ */ jsxs("div", { children: [
-            /* @__PURE__ */ jsx("h2", { children: /* @__PURE__ */ jsx("a", { class: "internal tag-link", href, children: t }) }),
-            tagDesc && /* @__PURE__ */ jsx("p", { children: tagDesc }),
-            /* @__PURE__ */ jsxs("div", { class: "page-listing", children: [
-              /* @__PURE__ */ jsxs("p", { children: [
+          return /* @__PURE__ */ u2("div", { children: [
+            /* @__PURE__ */ u2("h2", { children: /* @__PURE__ */ u2("a", { class: "internal tag-link", href, children: t2 }) }),
+            tagDesc && /* @__PURE__ */ u2("p", { children: tagDesc }),
+            /* @__PURE__ */ u2("div", { class: "page-listing", children: [
+              /* @__PURE__ */ u2("p", { children: [
                 i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length }),
-                pages.length > options.numPages && /* @__PURE__ */ jsxs(Fragment, { children: [
+                pages.length > options.numPages && /* @__PURE__ */ u2(S, { children: [
                   " ",
-                  /* @__PURE__ */ jsx("span", { children: i18n(locale).pages.tagContent.showingFirst({
+                  /* @__PURE__ */ u2("span", { children: i18n(locale).pages.tagContent.showingFirst({
                     count: options.numPages
                   }) })
                 ] })
@@ -2825,11 +2866,11 @@ var TagContent_default = ((opts) => {
         ...listProps,
         sort: options?.sort
       });
-      return /* @__PURE__ */ jsxs("div", { class: "popover-hint", children: [
-        /* @__PURE__ */ jsx("article", { class: classes, children: /* @__PURE__ */ jsx("div", { class: "markdown-preview-view markdown-rendered", children: content }) }),
-        /* @__PURE__ */ jsxs("div", { class: "page-listing", children: [
-          /* @__PURE__ */ jsx("p", { children: i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length }) }),
-          /* @__PURE__ */ jsx("div", { children: pageListContent })
+      return /* @__PURE__ */ u2("div", { class: "popover-hint", children: [
+        /* @__PURE__ */ u2("article", { class: classes, children: /* @__PURE__ */ u2("div", { class: "markdown-preview-view markdown-rendered", children: content }) }),
+        /* @__PURE__ */ u2("div", { class: "page-listing", children: [
+          /* @__PURE__ */ u2("p", { children: i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length }) }),
+          /* @__PURE__ */ u2("div", { children: pageListContent })
         ] })
       ] });
     }
@@ -2847,7 +2888,7 @@ var TagPage = (opts) => ({
   priority: 10,
   match: tagMatcher,
   generate({ content, cfg }) {
-    const allFiles = content.map((c) => c[1].data).filter((d) => d?.unlisted !== true);
+    const allFiles = content.map((c2) => c2[1].data).filter((d2) => d2?.unlisted !== true);
     const locale = cfg?.locale ?? "en-US";
     const tags = new Set(
       allFiles.flatMap((data) => data.frontmatter?.tags ?? []).flatMap(getAllSegmentPrefixes)
