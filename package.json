@@ -102,6 +102,13 @@
     "dependencies": [],
     "defaultOrder": 50,
     "defaultEnabled": true,
-    "defaultOptions": {}
+    "defaultOptions": {
+      "numPages": 10
+    },
+    "optionSchema": {
+      "numPages": {
+        "type": "number"
+      }
+    }
   }
 }
