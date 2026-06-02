@@ -36,6 +36,11 @@ function isListed(file: PageFileData): boolean {
   return file.unlisted !== true;
 }
 
+function getParentTags(tag: string): string[] {
+  const segments = tag.split("/").filter(Boolean);
+  return segments.slice(0, -1).map((_, index) => segments.slice(0, index + 1).join("/"));
+}
+
 export default ((opts?: Partial<TagContentOptions>) => {
   const options: TagContentOptions = { ...defaultOptions, ...opts };
 
@@ -144,6 +149,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
       );
     } else {
       const pages = allPagesWithTag(tag);
+      const parentTags = getParentTags(tag);
       const listProps = {
         ...props,
         allFiles: pages,
@@ -155,6 +161,23 @@ export default ((opts?: Partial<TagContentOptions>) => {
 
       return (
         <div class="popover-hint">
+          {parentTags.length > 0 && (
+            <nav class="tag-parents">
+              {parentTags.map((parentTag, index) => {
+                const parentTagPage = `/tags/${parentTag}` as FullSlug;
+                const href = resolveRelative(slug as FullSlug, parentTagPage);
+
+                return (
+                  <>
+                    {index > 0 && <span class="tag-parent-separator">/</span>}
+                    <a class="internal tag-link" href={href}>
+                      {parentTag}
+                    </a>
+                  </>
+                );
+              })}
+            </nav>
+          )}
           <article class={classes}>
             <div class="markdown-preview-view markdown-rendered">{content}</div>
           </article>

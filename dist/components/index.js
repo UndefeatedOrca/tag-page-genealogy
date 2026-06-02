@@ -2792,7 +2792,7 @@ function i18n(locale) {
 }
 
 // src/components/styles/listPage.scss
-var listPage_default = "ul.section-ul {\n  list-style: none;\n  margin-top: 2em;\n  padding-left: 0;\n}\n\nli.section-li {\n  margin-bottom: 1em;\n}\nli.section-li > .section {\n  display: grid;\n  grid-template-columns: fit-content(8em) 3fr 1fr;\n}\n@media all and (max-width: 600px) {\n  li.section-li > .section > .tags {\n    display: none;\n  }\n}\nli.section-li > .section > .desc > h3 > a {\n  background-color: transparent;\n}\nli.section-li > .section .meta {\n  margin: 0 1em 0 0;\n  opacity: 0.6;\n}\n\n.popover .section {\n  grid-template-columns: fit-content(8em) 1fr !important;\n}\n.popover .section > .tags {\n  display: none;\n}";
+var listPage_default = "ul.section-ul {\n  list-style: none;\n  margin-top: 2em;\n  padding-left: 0;\n}\n\n.tag-parents {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.35rem;\n  margin-bottom: 1rem;\n}\n\n.tag-parent-separator {\n  opacity: 0.6;\n}\n\nli.section-li {\n  margin-bottom: 1em;\n}\nli.section-li > .section {\n  display: grid;\n  grid-template-columns: fit-content(8em) 3fr 1fr;\n}\n@media all and (max-width: 600px) {\n  li.section-li > .section > .tags {\n    display: none;\n  }\n}\nli.section-li > .section > .desc > h3 > a {\n  background-color: transparent;\n}\nli.section-li > .section .meta {\n  margin: 0 1em 0 0;\n  opacity: 0.6;\n}\n\n.popover .section {\n  grid-template-columns: fit-content(8em) 1fr !important;\n}\n.popover .section > .tags {\n  display: none;\n}";
 
 // src/components/TagContent.tsx
 var defaultOptions = {
@@ -2804,6 +2804,10 @@ function concatenateResources(...resources) {
 }
 function isListed(file) {
   return file.unlisted !== true;
+}
+function getParentTags(tag) {
+  const segments = tag.split("/").filter(Boolean);
+  return segments.slice(0, -1).map((_2, index2) => segments.slice(0, index2 + 1).join("/"));
 }
 var TagContent_default = ((opts) => {
   const options = { ...defaultOptions, ...opts };
@@ -2874,6 +2878,7 @@ var TagContent_default = ((opts) => {
       ] });
     } else {
       const pages = allPagesWithTag(tag);
+      const parentTags = getParentTags(tag);
       const listProps = {
         ...props,
         allFiles: pages
@@ -2883,6 +2888,14 @@ var TagContent_default = ((opts) => {
         sort: options?.sort
       });
       return /* @__PURE__ */ u2("div", { class: "popover-hint", children: [
+        parentTags.length > 0 && /* @__PURE__ */ u2("nav", { class: "tag-parents", children: parentTags.map((parentTag, index2) => {
+          const parentTagPage = `/tags/${parentTag}`;
+          const href = resolveRelative(slug2, parentTagPage);
+          return /* @__PURE__ */ u2(S, { children: [
+            index2 > 0 && /* @__PURE__ */ u2("span", { class: "tag-parent-separator", children: "/" }),
+            /* @__PURE__ */ u2("a", { class: "internal tag-link", href, children: parentTag })
+          ] });
+        }) }),
         /* @__PURE__ */ u2("article", { class: classes, children: /* @__PURE__ */ u2("div", { class: "markdown-preview-view markdown-rendered", children: content }) }),
         /* @__PURE__ */ u2("div", { class: "page-listing", children: [
           /* @__PURE__ */ u2("p", { children: i18n(locale).pages.tagContent.itemsUnderTag({ count: pages.length }) }),

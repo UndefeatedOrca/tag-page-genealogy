@@ -4,6 +4,17 @@ ul.section-ul {
   padding-left: 0;
 }
 
+.tag-parents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.tag-parent-separator {
+  opacity: 0.6;
+}
+
 li.section-li {
   margin-bottom: 1em;
 
